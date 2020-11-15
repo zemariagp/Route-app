@@ -1,0 +1,21 @@
+<h1>This is a private page.</h1>
+<div id='back-to-main'>
+  <a href="/">Back to main page</a>
+</div>
+<div id="map" style='width: 90vw; height: 85vh; margin:50px auto;'></div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2FyYWV3aWxjb3giLCJhIjoiY2toZjUwd3VlMTFicDJwbjF1YnMzdzhpbiJ9.pVeE1OrbqXLN9xltNCaU1Q';
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/saraewilcox/ckhgcrf0317f81apggpz52kfa', // stylesheet location
+    center: [-9.128732, 38.715017], // starting position [lng, lat]  
+    zoom: 12 // starting zoom
+  });
+
+
+  // Add zoom and rotation controls to the map.
+  map.addControl(new mapboxgl.NavigationControl());
+  map.addControl(new mapboxgl.FullscreenControl());
+
+
+</script>
