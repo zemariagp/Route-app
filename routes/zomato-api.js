@@ -1,7 +1,7 @@
-const axios = require('axios');
+
 const express = require('express');
 const router = express.Router();
-
+const axios = require('axios');
 
 const zomatoAPI = axios.create({
   baseURL: 'https://developers.zomato.com/api/v2.1/',

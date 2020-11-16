@@ -28,9 +28,10 @@ router.get('/private', (req, res) => {
   res.render('private');
 });
 
-router.get("/zomato", (req, res) => {
+/*router.get("/zomato", (req, res) => {
   res.render("zomato");
 })
+*/
 
 router.get("/restaurant-search", (req, res) => {
   const markers = [

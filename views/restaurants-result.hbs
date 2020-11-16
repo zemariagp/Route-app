@@ -7,13 +7,39 @@
 <button type="submit" onclick="searchPlaces()">Search Places</button>
 
 <script>
+  const zomatoAPI = axios.create({
+    baseURL: 'https://developers.zomato.com/api/v2.1/',
+    headers: { 'user-key': "83cd93e9820f4153649a4d837be70144" }
+  });
 
+  function parseQuery(string) {
+    string.replace(" ", "%")
+  }
+
+  function getFirst(restaurant) {
+    zomatoAPI.get("/search", {
+      params: {
+        q: parseQuery(restaurant.name),
+        sort: "real_distance",
+        order: "desc",
+        lat: restaurant.geometry.location.lat(),
+        lon: restaurant.geometry.location.lng()
+
+
+      }
+    }).then((response) => {
+      console.log(restaurant.name)
+      console.log(response)
+    })
+  }
+
+  let firstRestaurant;
   function searchPlaces() {
     const heden = { lat: 38.7117206, lng: -9.1264315 };
     let request = {
       location: heden,
       radius: "500",
-      type: ["restaurants"]
+      type: ["restaurant"]
     };
     let service = new google.maps.places.PlacesService(map);
     service.nearbySearch(request, (results, status) => {
@@ -23,6 +49,10 @@
           let lng = results[i].geometry.location.lng();
           setMarker({ lat, lng });
         }
+        console.log(results)
+        firstRestaurant = results[3];
+        console.log(firstRestaurant)
+        getFirst(firstRestaurant)
       }
     })
   }
