@@ -10,7 +10,9 @@
   <script src="https://kit.fontawesome.com/d87e59c9ec.js" crossorigin="anonymous"></script>
   <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-  <style>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{gmapKey}}&callback=initMap&libraries=places&v=weekly"
+    defer></script>
+  <!--> <style>
     body {
       margin: 0;
       padding: 0;
@@ -24,6 +26,7 @@
       height: 100%;
     }
   </style>
+  <!-->
 </head>
 
 <body>
@@ -31,7 +34,7 @@
   {{{body}}}
 
   <script src="/javascripts/script.js"></script>
-  <i class="fas fa-thumbs-up fa-5x"></i>
+
 </body>
 
 </html>
