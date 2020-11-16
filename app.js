@@ -14,6 +14,9 @@ const helpers      = require('handlebars-helpers');
 const session      = require('express-session');
 const MongoStore   = require('connect-mongo')(session);
 
+
+
+
 mongoose
   .connect('mongodb://localhost/route-app', {useNewUrlParser: true})
   .then(x => {
@@ -95,5 +98,9 @@ app.use('/', index);
 //////////////11.11 cyber security stuff///////////////////////
 const auth = require('./routes/auth');
 app.use('/', auth);
+
+
+const zomatoApi = require("./routes/zomato-api");
+app.use("/", zomatoApi);
 
 module.exports = app;

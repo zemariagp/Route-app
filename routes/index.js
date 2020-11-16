@@ -1,6 +1,12 @@
 const express = require('express');
 const router  = express.Router();
 const app = require('../app');
+const axios = require('axios');
+
+const zomatoAPI = axios.create({
+  baseURL: 'https://developers.zomato.com/api/v2.1/',
+  headers: { 'user-key': process.env.ZOMATO_KEY }
+});
 
 //middleware we create:
 function requireLogin(req, res, next) {
@@ -22,5 +28,18 @@ router.get('/private', (req, res) => {
   res.render('private');
 });
 
+router.get("/zomato", (req, res) => {
+  res.render("zomato");
+})
+
+router.get("/zomato-results", (req, res) => {
+  zomatoAPI.get(`establishments?city_id=82`)
+  .then((response) => {
+    console.log(response.data.establishments)
+    let establishment = response.data.establishments;
+    res.render("zomato-results", {establishment})
+   
+  }) 
+} )
 
 module.exports = router;
