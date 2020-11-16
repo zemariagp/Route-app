@@ -82,7 +82,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 // default value for title local
 app.locals.title = 'Express - Generated with IronGenerator';
-
+app.locals.gmapKey = process.env.GOOGLE_MAPS_API_KEY;
 
 
 const index = require('./routes/index');
@@ -102,5 +102,8 @@ app.use('/', auth);
 
 const zomatoApi = require("./routes/zomato-api");
 app.use("/", zomatoApi);
+
+const restaurantsResult = require('./routes/index');
+app.use('/', restaurantsResult);
 
 module.exports = app;
