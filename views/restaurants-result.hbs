@@ -4,21 +4,23 @@
 <!--<button type="submit" onclick="showMarkers({{markers}})">Show Markers</button>-->
 <!--<button type="submit" onclick="calcRoute()">Route</button>-->
 <div>
-  <form>
+  <form id="routeSearchForm" action="#" method="GET">
     <label for="start">
-      <input type="text" name="route-search-start" placeholder="starting point">
+      <input type="text" id="start" name="route-search-start" placeholder="starting point">
     </label>
     <label for="end">
-      <input type="text" name="route-search-end" placeholder="destination">
+      <input type="text" id="end" name="route-search-end" placeholder="destination">
     </label>
-    <button type="submit" onclick="calcRoute()">Select route</button>
+    <button type="submit">Select route</button>
   </form>
 </div>
 <button type="submit" onclick="getCurrentLocation()">Get current location</button>
 <button type="submit" onclick="searchPlaces()">Search Places</button>
 
 <script>
+  let routeDestinationCoordinates;
   /*
+
   const zomatoAPI = axios.create({
     baseURL: 'https://developers.zomato.com/api/v2.1/',
     headers: { 'user-key': "83cd93e9820f4153649a4d837be70144" }
@@ -46,9 +48,8 @@
   let firstRestaurant;
 */
   function searchPlaces() {
-    const heden = { lat: 38.7117206, lng: -9.1264315 };
     let request = {
-      location: heden,
+      location: routeDestinationCoordinates,
       radius: "100",
       type: ["restaurant"]
     };
@@ -56,9 +57,10 @@
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
+          let name = results[i].name
           let lat = results[i].geometry.location.lat();
           let lng = results[i].geometry.location.lng();
-          setMarker({ lat, lng });
+          setMarker({ lat, lng }, name);
         }
         //   console.log(results)
         //   firstRestaurant = results[3];
@@ -83,6 +85,11 @@
     };
     directionsService.route(request, (result, status) => {
       if (status === "OK") {
+        routeDestinationCoordinates = {
+          lat: result.routes[0].legs[0].end_location.lat(),
+          lng: result.routes[0].legs[0].end_location.lng(),
+        }
+
         directionsRenderer.setDirections(result);
       }
     })
@@ -96,11 +103,18 @@
     });
   }
 
-  function setMarker(marker) {
-    new google.maps.Marker({
+  function setMarker(marker, name) {
+    // console.log('marker', marker);
+    let customMarker = new google.maps.Marker({
       position: marker,
       map: map
-    })
+    });
+    const infowindow = new google.maps.InfoWindow({
+      content: name,
+    });
+    customMarker.addListener("click", () => {
+      infowindow.open(map, customMarker);
+    });
   }
 
 
@@ -115,5 +129,9 @@
     });
   }
 
+  document.getElementById('routeSearchForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    calcRoute();
+  })
 
 </script>
