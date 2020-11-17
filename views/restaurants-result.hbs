@@ -26,6 +26,12 @@
     <label for="bars">Bars</label>
     <input type="checkbox" id="bakeries" name="bakeries">
     <label for="bakeries">Bakeries</label>
+    <input type="checkbox" id="supermarket" name="supermarkets">
+    <label for="supermarket">Supermarket</label>
+    <input type="checkbox" id="pharmacy" name="pharmacies">
+    <label for="pharmacy">Pharmacy</label>
+    <input type="checkbox" id="laundry" name="laundries">
+    <label for="laundry">Laundry</label>
 
     <button type="submit">Search Places</button>
   </form>
@@ -76,14 +82,24 @@
     let restaurant = event.path[0][0];
     let bar = event.path[0][1];
     let bakeries = event.path[0][2];
+    let supermarket = event.path[0][3];
+    let pharmacy = event.path[0][4];
+    let laundry = event.path[0][5];
 
     let checkedTypes = [];
     if (restaurant.checked) {
+      console.log(restaurant.checked)
       checkedTypes.push('restaurant')
     } else if (bar.checked) {
       checkedTypes.push('bar')
     } else if (bakeries.checked) {
       checkedTypes.push('bakery')
+    } else if (supermarket.checked) {
+      checkedTypes.push('supermarket')
+    } else if (pharmacy.checked) {
+      checkedTypes.push('pharmacy')
+    } else if (laundry.checked) {
+      checkedTypes.push('laundry')
     } else {
       clearMarkers();
     }
@@ -93,7 +109,7 @@
     } else {
       let request = {
         location: routeDestinationCoordinates,
-        radius: "100",
+        radius: "150",
         type: checkedTypes
       };
       let service = new google.maps.places.PlacesService(map)

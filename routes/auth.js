@@ -83,7 +83,7 @@ router.post('/login', (req, res) => {
       if (bcrypt.compareSync(password, user.password)) {
         //Logged in sucessfully
         res.render('index', { user })
-       
+      
       } else {
         //Passwords don't match
         res.render('auth/login', {
