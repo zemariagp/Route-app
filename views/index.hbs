@@ -2,17 +2,15 @@
 <p>Welcome to {{title}}</p>
 <a href="/signup">Sign Up</a>
 
-
-
 {{#if user}}
 <p>Welcome back, {{user.username}}</p>
+<a href="/restaurant-search">Choose your Route</a>
 <form method="POST" action="/logout">
   <button type="submit">Logout</button>
 </form>
-<a href="/private">Private</a>
+<!--<a href="/private">Private</a>-->
 {{!-- <a href="/logout">log out</a> --}}
-<a href="/restaurant-search">Restaurant List</a>
-<a href="/zomato">Zomato</a>
+<!-- <a href="/zomato">Zomato</a>-->
 {{else}}
 <a href="/login">Log In</a>
 {{/if}}

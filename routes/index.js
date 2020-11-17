@@ -28,10 +28,7 @@ router.get('/private', (req, res) => {
   res.render('private');
 });
 
-/*router.get("/zomato", (req, res) => {
-  res.render("zomato");
-})
-*/
+
 
 router.get("/restaurant-search", (req, res) => {
   const markers = [
@@ -43,6 +40,11 @@ router.get("/restaurant-search", (req, res) => {
   res.render("restaurants-result", {markers: markersString});
 })
 
+/*router.get("/zomato", (req, res) => {
+  res.render("zomato");
+})
+*/
+/*
 router.get("/zomato-results", (req, res) => {
   zomatoAPI.get(`establishments?city_id=82`)
   .then((response) => {
@@ -52,5 +54,6 @@ router.get("/zomato-results", (req, res) => {
    
   }) 
 } )
+*/
 
 module.exports = router;
