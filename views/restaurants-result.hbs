@@ -11,15 +11,31 @@
     <label for="end">
       <input type="text" id="end" name="route-search-end" placeholder="destination">
     </label>
-    <button type="submit">Add route</button>
-    <button type="submit">Clear route</button>
+    <button type="submit" onclick="calcRoute()">Add route</button>
+    <button type="submit" id="clear-route" onclick="clearRoute()">Clear route</button>
+    <button type="submit" id="clear-markers" onclick="clearMarkers()">Clear markers</button>
   </form>
 </div>
 <button type="submit" onclick="getCurrentLocation()">Get current location</button>
-<button type="submit" onclick="searchPlaces()">Search Places</button>
+<div>
+  <form action="#" id="placesForm" method="GET">
 
+    <input type="checkbox" id="restaurants" name="restaurants">
+    <label for="restaurants">Restaurants</label>
+    <input type="checkbox" id="bars" name="bars">
+    <label for="bars">Bars</label>
+    <input type="checkbox" id="bakeries" name="bakeries">
+    <label for="bakeries">Bakeries</label>
+
+    <button type="submit">Search Places</button>
+  </form>
+</div>
 <script>
+  let markers = [];
   let routeDestinationCoordinates;
+  let directionsService;
+  let directionsRenderer;
+
   /*
 
   const zomatoAPI = axios.create({
@@ -47,39 +63,62 @@
   }
 
   let firstRestaurant;
-*/
-  function searchPlaces() {
-    let request = {
-      location: routeDestinationCoordinates,
-      radius: "100",
-      type: ["restaurant"]
-    };
-    let service = new google.maps.places.PlacesService(map)
 
-    service.nearbySearch(request, (results, status) => {
 
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        for (let i = 0; i < results.length; i++) {
-          let name = results[i].name
-          let lat = results[i].geometry.location.lat();
-          let lng = results[i].geometry.location.lng();
-          setMarker({ lat, lng }, name)
-          map.setCenter(routeDestinationCoordinates);
-          map.setZoom(18);
-
-        }
-        //   console.log(results)
-        //   firstRestaurant = results[3];
-        //   console.log(firstRestaurant)
-        //   getFirst(firstRestaurant)
-      }
-    })
+  function deleteMarkers() {
+    clearMarkers();
+    customMarker = [];
   }
+  */
+
+  function searchPlaces(event) {
+
+    let restaurant = event.path[0][0];
+    let bar = event.path[0][1];
+    let bakeries = event.path[0][2];
+
+    let checkedTypes = [];
+    if (restaurant.checked) {
+      checkedTypes.push('restaurant')
+    } else if (bar.checked) {
+      checkedTypes.push('bar')
+    } else if (bakeries.checked) {
+      checkedTypes.push('bakery')
+    } else {
+      clearMarkers();
+    }
+
+    if (!checkedTypes.length) {
+      alert('Please select one option')
+    } else {
+      let request = {
+        location: routeDestinationCoordinates,
+        radius: "100",
+        type: checkedTypes
+      };
+      let service = new google.maps.places.PlacesService(map)
+
+      service.nearbySearch(request, (results, status) => {
+
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (let i = 0; i < results.length; i++) {
+            let name = results[i].name
+            let lat = results[i].geometry.location.lat();
+            let lng = results[i].geometry.location.lng();
+            setMarker({ lat, lng }, name)
+            map.setCenter(routeDestinationCoordinates);
+            map.setZoom(18);
+          };
+        };
+      });
+
+    }
+  };
 
 
   function calcRoute() {
-    let directionsService = new google.maps.DirectionsService();
-    let directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
     //let start = "Santa Apolónia, Lisboa";
     // let end = "Rato, Lisboa";
     let start = document.getElementById('start').value;
@@ -121,6 +160,7 @@
     customMarker.addListener("click", () => {
       infowindow.open(map, customMarker);
     });
+    markers.push(customMarker)
   }
 
 
@@ -138,7 +178,30 @@
 
   document.getElementById('routeSearchForm').addEventListener('submit', (event) => {
     event.preventDefault();
-    calcRoute();
   })
+
+  document.getElementById('placesForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    searchPlaces(event);
+  })
+
+  // Sets the map on all markers in the array.
+  function setMapOnAll(map) {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+
+  function clearMarkers() {
+    setMapOnAll(null);
+    markers = [];
+  }
+
+  function clearRoute() {
+    // Clear past routes
+    directionsRenderer.setMap(null)
+    document.getElementById('start').value = ''
+    document.getElementById('end').value = ''
+  }
 
 </script>
