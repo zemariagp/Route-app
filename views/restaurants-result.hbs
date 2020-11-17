@@ -11,7 +11,8 @@
     <label for="end">
       <input type="text" id="end" name="route-search-end" placeholder="destination">
     </label>
-    <button type="submit">Select route</button>
+    <button type="submit">Add route</button>
+    <button type="submit">Clear route</button>
   </form>
 </div>
 <button type="submit" onclick="getCurrentLocation()">Get current location</button>
@@ -129,6 +130,7 @@
         lat: position.coords.latitude,
         lng: position.coords.longitude
       }
+      setMarker(pos);
       map.setCenter(pos);
       map.setZoom(13);
     });
