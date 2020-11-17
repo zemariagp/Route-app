@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let map;
 function initMap() {
+  var inputStart = document.getElementById('start');
+  var autocompleteStart = new google.maps.places.Autocomplete(inputStart);
+  var inputEnd = document.getElementById('end');
+  var autocompleteEnd = new google.maps.places.Autocomplete(inputEnd);
   const lisbon = { lat: 38.7117206, lng: -9.1264315 };
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 17, 
