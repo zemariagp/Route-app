@@ -53,14 +53,19 @@
       radius: "100",
       type: ["restaurant"]
     };
-    let service = new google.maps.places.PlacesService(map);
+    let service = new google.maps.places.PlacesService(map)
+
     service.nearbySearch(request, (results, status) => {
+
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length; i++) {
           let name = results[i].name
           let lat = results[i].geometry.location.lat();
           let lng = results[i].geometry.location.lng();
-          setMarker({ lat, lng }, name);
+          setMarker({ lat, lng }, name)
+          map.setCenter(routeDestinationCoordinates);
+          map.setZoom(18);
+
         }
         //   console.log(results)
         //   firstRestaurant = results[3];
