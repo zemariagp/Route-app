@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Streetart = require('../models/Streetart.js');
 const DB_NAME = 'route-app';
-mongoose.connect(`mongodb://localhost/${DB_NAME}`, {
+mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true
