@@ -106,4 +106,7 @@ app.use("/", zomatoApi);
 const restaurantsResult = require('./routes/index');
 app.use('/', restaurantsResult);
 
+const streetart = require('./routes/streetart');
+app.use('/', streetart);
+
 module.exports = app;
