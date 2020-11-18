@@ -109,4 +109,7 @@ app.use('/', restaurantsResult);
 const streetart = require('./routes/streetart');
 app.use('/', streetart);
 
+const api = require('./routes/api');
+app.use('/', api);
+
 module.exports = app;

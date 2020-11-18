@@ -14,6 +14,7 @@
     <button type="submit" onclick="calcRoute()">Add route</button>
     <button type="submit" id="clear-route" onclick="clearRoute()">Clear route</button>
     <button type="submit" id="clear-markers" onclick="clearMarkers()">Clear markers</button>
+    <button type="submit" id="clear-markers" onclick="updatemarker()">Show Street Art</button>
   </form>
 </div>
 <button type="submit" onclick="getCurrentLocation()">Get current location</button>
@@ -131,6 +132,28 @@
     }
   };
 
+  let streetarts = [];
+  function getstreetart() {
+    return axios.get('/api/streetart').then((results) => {
+      streetarts = results.data.results;
+
+    })
+  }
+
+  function updatemarker() {
+    getstreetart().then(() => {
+      streetarts.forEach(function (element) {
+        const markerStreetart = new google.maps.Marker({
+          position: new google.maps.LatLng(Number(element.lat), Number(element.lng)),
+          map: map,
+          icon: '../images/map_marker_black.png'
+
+        });
+        console.log(element)
+        //streetarts.push(markerStreetart);
+      })
+    })
+  }
 
   function calcRoute() {
     directionsService = new google.maps.DirectionsService();
@@ -142,7 +165,7 @@
     let request = {
       origin: start,
       destination: end,
-      travelMode: "DRIVING"
+      travelMode: "WALKING"
     };
     directionsService.route(request, (result, status) => {
       if (status === "OK") {
@@ -152,7 +175,9 @@
         }
 
         directionsRenderer.setDirections(result);
+
       }
+      console.log(result)
     })
     directionsRenderer.setMap(map);
   }
