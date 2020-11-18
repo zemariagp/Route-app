@@ -24,20 +24,20 @@ router.get('/', (req, res, next) => {
   // res.render('index', { user: req.app.locals.loggedUser });
 });
 //we want to keep the private page, private. for real.
-router.get('/private', (req, res) => {
-  res.render('private');
-});
+// router.get('/private', (req, res) => {
+//   res.render('private');
+// });
 
 
 
-router.get("/restaurant-search", (req, res) => {
+router.get("/route-search", (req, res) => {
   const markers = [
     { lat: 38.7129146, lng: -9.1286218 },
     { lat: 38.7117206, lng: -9.1264315 },
     { lat: 38.7123872, lng: -9.1287935}
   ];
   let markersString = JSON.stringify(markers);
-  res.render("restaurants-result", {markers: markersString});
+  res.render("route-result", {markers: markersString});
 })
 
 

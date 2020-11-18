@@ -100,11 +100,8 @@ const auth = require('./routes/auth');
 app.use('/', auth);
 
 
-const zomatoApi = require("./routes/zomato-api");
-app.use("/", zomatoApi);
-
-const restaurantsResult = require('./routes/index');
-app.use('/', restaurantsResult);
+const routeResult = require('./routes/index');
+app.use('/', routeResult);
 
 const streetart = require('./routes/streetart');
 app.use('/', streetart);
