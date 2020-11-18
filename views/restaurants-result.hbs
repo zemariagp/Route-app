@@ -28,10 +28,10 @@
     <label for="bakeries">Bakeries</label>
     <input type="checkbox" id="supermarket" name="supermarkets">
     <label for="supermarket">Supermarket</label>
-    <input type="checkbox" id="pharmacy" name="pharmacies">
-    <label for="pharmacy">Pharmacy</label>
-    <input type="checkbox" id="laundry" name="laundries">
-    <label for="laundry">Laundry</label>
+    <input type="checkbox" id="tourist_attraction" name="touristAttractions">
+    <label for="tourist_attraction">Viewpoints</label>
+    <input type="checkbox" id="art_gallery" name="artGalleries">
+    <label for="art_gallery">Art Gallery</label>
 
     <button type="submit">Search Places</button>
   </form>
@@ -83,12 +83,12 @@
     let bar = event.path[0][1];
     let bakeries = event.path[0][2];
     let supermarket = event.path[0][3];
-    let pharmacy = event.path[0][4];
-    let laundry = event.path[0][5];
+    let touristAttraction = event.path[0][4];
+    let artGallery = event.path[0][5];
 
     let checkedTypes = [];
     if (restaurant.checked) {
-      console.log(restaurant.checked)
+      // console.log(restaurant.checked)
       checkedTypes.push('restaurant')
     } else if (bar.checked) {
       checkedTypes.push('bar')
@@ -96,10 +96,10 @@
       checkedTypes.push('bakery')
     } else if (supermarket.checked) {
       checkedTypes.push('supermarket')
-    } else if (pharmacy.checked) {
-      checkedTypes.push('pharmacy')
-    } else if (laundry.checked) {
-      checkedTypes.push('laundry')
+    } else if (tourist_attraction.checked) {
+      checkedTypes.push('tourist_attraction')
+    } else if (art_gallery.checked) {
+      checkedTypes.push('art_gallery')
     } else {
       clearMarkers();
     }
