@@ -14,6 +14,13 @@
     <button type="submit" onclick="calcRoute()">Add route</button>
     <button type="submit" id="clear-route" onclick="clearRoute()">Clear route</button>
     <button type="submit" id="clear-markers" onclick="clearMarkers()">Clear markers</button>
+    <form action="/route-search" method="POST">
+      <label>
+        <p>Save route to favorites <input class="updates" type="text" name="favorite"></p>
+      </label>
+      <button type="submit" id="save-route" onclick="">Save route</button>
+    </form>
+
     <button type="submit" id="clear-markers" onclick="updatemarker()">Show Street Art</button>
   </form>
 </div>
@@ -43,40 +50,6 @@
   let directionsService;
   let directionsRenderer;
 
-  /*
-
-  const zomatoAPI = axios.create({
-    baseURL: 'https://developers.zomato.com/api/v2.1/',
-    headers: { 'user-key': "83cd93e9820f4153649a4d837be70144" }
-  });
-
-  function parseQuery(string) {
-    string.replace(" ", "%")
-  }
-
-  function getFirst(restaurant) {
-    zomatoAPI.get("/search", {
-      params: {
-        q: parseQuery(restaurant.name),
-        sort: "real_distance",
-        order: "desc",
-        lat: restaurant.geometry.location.lat(),
-        lon: restaurant.geometry.location.lng()
-      }
-    }).then((response) => {
-      console.log(restaurant.name)
-      console.log(response)
-    })
-  }
-
-  let firstRestaurant;
-
-
-  function deleteMarkers() {
-    clearMarkers();
-    customMarker = [];
-  }
-  */
 
   function searchPlaces(event) {
 
@@ -177,7 +150,7 @@
         directionsRenderer.setDirections(result);
 
       }
-      console.log(result)
+      //  console.log(result)
     })
     directionsRenderer.setMap(map);
   }
