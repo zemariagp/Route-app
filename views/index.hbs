@@ -1,20 +1,47 @@
-<div class="login-page">
-  <h1>{{title}}</h1>
-  <p>Welcome to {{title}}</p>
-  {{#unless user}}
-  <a href="/signup" id="signup">Sign Up</a>
-  {{/unless}}
+<nav class="navbar fixed-top navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/images/purple-stars.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    {{title}}
+  </a>
+</nav>
 
-  {{#if user}}
-  <p>Welcome back, {{user.username}}</p>
-  <a href="/route-search">Choose your Route</a>
-  <form method="POST" action="/logout">
-    <button type="submit">Logout</button>
-  </form>
-  <!--<a href="/private">Private</a>-->
-  {{!-- <a href="/logout">log out</a> --}}
-  <!-- <a href="/zomato">Zomato</a>-->
-  {{else}}
-  <a href="/login">Log In</a>
-  {{/if}}
-</div>
+
+
+{{#unless user}}
+<h1>Welcome to {{title}}</h1>
+<a href="/signup" id="signup">Sign Up</a>
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <span> Route APP |
+      <br> Copyright © 2020 Ionhack
+    </span>
+  </div>
+</footer>
+{{/unless}}
+
+{{#if user}}
+<p>Welcome back, {{user.username}}</p>
+<a href="/route-search">Choose your Route</a>
+<form method="POST" action="/logout">
+  <button type="submit">Logout</button>
+</form>
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <span> Route APP |
+      <br> Copyright © 2020 Ionhack
+    </span>
+  </div>
+</footer>
+<!--<a href="/private">Private</a>-->
+{{!-- <a href="/logout">log out</a> --}}
+<!-- <a href="/zomato">Zomato</a>-->
+{{else}}
+<a href="/login">Log In</a>
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <span> Route APP |
+      <br> Copyright © 2020 Ionhack
+    </span>
+  </div>
+</footer>
+{{/if}}

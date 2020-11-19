@@ -7,14 +7,35 @@ a {
 
 #map {
   height: 500px;
-  width: 100%; }
+  width: 100%; 
+}
+.details-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 37px;
+  margin-top: -20px;
+}
+.graffiti {
+  width: 60vw;
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 
-#login-page {
-  background-image: url("../images/lisbon.mp4");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 300px;
-  z-index: -1; }
+}
 
-/*# sourceMappingURL=style.css.map */
+.col-sm-4 {
+  margin-bottom: 20px!important;
+}
+
+  footer {
+    display: flex;
+    position: fixed;
+    margin-top: 550px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #292929;
+    color: white;
+    font-size: 12px;
+    text-align: left;
+}
