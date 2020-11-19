@@ -1,7 +1,22 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<nav class="navbar fixed-top navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/images/purple-stars.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    {{title}}
+  </a>
+</nav>
+
+
+
 {{#unless user}}
+<h1>Welcome to {{title}}</h1>
 <a href="/signup" id="signup">Sign Up</a>
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <span> Route APP |
+      <br> Copyright © 2020 Ionhack
+    </span>
+  </div>
+</footer>
 {{/unless}}
 
 {{#if user}}
@@ -10,9 +25,23 @@
 <form method="POST" action="/logout">
   <button type="submit">Logout</button>
 </form>
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <span> Route APP |
+      <br> Copyright © 2020 Ionhack
+    </span>
+  </div>
+</footer>
 <!--<a href="/private">Private</a>-->
 {{!-- <a href="/logout">log out</a> --}}
 <!-- <a href="/zomato">Zomato</a>-->
 {{else}}
 <a href="/login">Log In</a>
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <span> Route APP |
+      <br> Copyright © 2020 Ionhack
+    </span>
+  </div>
+</footer>
 {{/if}}

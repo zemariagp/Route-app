@@ -1,3 +1,10 @@
+<nav class="navbar fixed-top navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="/images/purple-stars.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+    {{title}}
+  </a>
+</nav>
+
 <h2>Sign Up</h2>
 <form action="/signup" method="POST">
   <label>
@@ -17,3 +24,11 @@
   <div class="error">{{errorMessage}}</div>
   {{/if}}
 </form>
+
+<footer class="footer fixed-bottom">
+  <div class="container">
+    <span> Route APP |
+      <br> Copyright © 2020 Ionhack
+    </span>
+  </div>
+</footer>
