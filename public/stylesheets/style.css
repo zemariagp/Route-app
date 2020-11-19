@@ -6,7 +6,7 @@ a {
   color: #00B7FF; }
 
 #map {
-  height: 500px;
+  height: 500px;  
   width: 100%; 
 }
 .details-title {
@@ -39,3 +39,6 @@ a {
     font-size: 12px;
     text-align: left;
 }
+
+
+/*# sourceMappingURL=style.css.map */
