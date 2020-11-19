@@ -12,9 +12,10 @@
 <hr>
 <p>Have you seen it? Add your review:</p>
 <form action="/reviews/{{streetart._id}}/add" method="POST">
+  {{#each streetart}}
   <label>
     User
-    <input type="text" name="user">
+    {{this.user}}
   </label>
   <label>
     User
