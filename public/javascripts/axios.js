@@ -1,2 +1,2 @@
 function streetartLocations(){
-  axios.get('/api/streetart')}
+  axios.get('/api/all')}
