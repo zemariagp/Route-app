@@ -1,5 +1,6 @@
 const mongoose = require ('mongoose');
 const { Schema, model } = mongoose;
+
 const streetartSchema = new Schema (
   {
     neighborhood: String, 

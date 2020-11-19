@@ -3,8 +3,9 @@ const { Schema, model } = mongoose;
 
 const favoriteSchema = new Schema (
   {
-    origin: String,
-    destination: String
+    favoriteName: String,
+    start: String,
+    end: String
   },
   {
     timestamps: true
