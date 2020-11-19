@@ -19,9 +19,9 @@ function initMap() {
   var autocompleteStart = new google.maps.places.Autocomplete(inputStart, options);
   var inputEnd = document.getElementById('end');
   var autocompleteEnd = new google.maps.places.Autocomplete(inputEnd, options);
-  const lisbon = { lat: 38.7117206, lng: -9.1264315 };
+  const lisbon = { lat: 38.7223, lng: -9.1393 };
   map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 17, 
+    zoom: 12, 
     center: lisbon,
     
 

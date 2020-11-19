@@ -134,13 +134,11 @@
           animation: google.maps.Animation.DROP
         });
         let contentString =
-          `<a href=${`/streetarts/{{element._id}}`}> 
+          `<a href=${`/streetarts/{{element._id}}/edit`}> 
 				<div class='info__container'>
 					<div class='info__text'>	
-						<h1 class='info__text__title'>${element.name_description}</h1> 
+						<h3 class='info__text__title'>${element.name_description}</h3> 
 						<h5 class='info__text__subtitle'>${element.artist}</h5>
-            <h5 class='info__text__subtitle'>Start here<$let start = document.getElementById>${element.address}.value;
-            <h5 class='info__text__subtitle'>End here<$let end = document.getElementById>${element.address}.value;
 					</div>
 				</div></a>`
 
@@ -150,6 +148,7 @@
           content: contentString,
 
         });
+        map.setZoom(13);
         markerStreetart.addListener("click", () => {
           infowindow.open(map, markerStreetart);
         });

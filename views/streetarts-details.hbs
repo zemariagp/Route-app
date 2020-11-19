@@ -2,7 +2,7 @@
 <p><img src={{streetart.imageUrl}} class="card-img-top" alt={{streetart.name_description}}>
   <hr>
 
-<p>Art by: {{streetart.artist}}</p>
+<p>Art by:{{streetart.artist}}</p>
 <p>Summary: {{streetart.name_description}}</p>
 <p>Address: {{streetart.address}}</p>
 <p>Latitude: {{streetart.latitude}}</p>
@@ -12,6 +12,10 @@
 <hr>
 <p>Have you seen it? Add your review:</p>
 <form action="/reviews/{{streetart._id}}/add" method="POST">
+  <label>
+    User
+    <input type="text" name="user">
+  </label>
   <label>
     User
     <input type="text" name="user">
