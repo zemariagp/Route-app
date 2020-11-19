@@ -1,33 +1,36 @@
-<h2>Where you want to go?</h2>
+<h2>Where do you want to go?</h2>
 
 <div id="map"></div>
 <!--<button type="submit" onclick="showMarkers({{markers}})">Show Markers</button>-->
 <!--<button type="submit" onclick="calcRoute()">Route</button>-->
 <div>
-  <form id="routeSearchForm" action="#" method="GET">
+  <form id="routeSearchForm" action="/route-search" method="POST">
     <label for="start">
-      <input type="text" id="start" name="route-search-start" placeholder="starting point">
+      <input type="text" id="start" name="start" placeholder="starting point">
     </label>
     <label for="end">
-      <input type="text" id="end" name="route-search-end" placeholder="destination">
+      <input type="text" id="end" name="end" placeholder="destination">
     </label>
-    <button type="submit" onclick="calcRoute()">Add route</button>
-    <button type="submit" id="clear-route" onclick="clearRoute()">Clear route</button>
-    <button type="submit" id="clear-markers" onclick="clearMarkers()">Clear markers</button>
-    <form action="/route-search" method="POST">
-      <label>
-        <p>Save route to favorites <input class="updates" type="text" name="favorite"></p>
-      </label>
-      <button type="submit" id="save-route" onclick="">Save route</button>
-    </form>
-
-    <button type="submit" id="clear-markers" onclick="updatemarker()">Show Street Art</button>
+    <button id="add-route">Add route</button>
+    <button id="clear-route">Clear route</button>
+    <button id="clear-markers">Clear markers</button>
+    <button id="get-current-location">Get current location</button>
+    <button type="submit" id="show-street-art">Show Street Art</button>
+    <label>
+      <p>Save route to favorites:
+        <input class="updates" type="text" name="favoriteName"></p>
+    </label>
+    <button type="submit" id="save-route">Save route</button>
   </form>
+
+
+  <a href="/streetarts">List of street art</a>
+  <a href="/streetarts/create">Create a new street art point</a>
+
+
 </div>
-<button type="submit" onclick="getCurrentLocation()">Get current location</button>
 <div>
   <form action="#" id="placesForm" method="GET">
-
     <input type="checkbox" id="restaurants" name="restaurants">
     <label for="restaurants">Restaurants</label>
     <input type="checkbox" id="bars" name="bars">
@@ -40,9 +43,15 @@
     <label for="tourist_attraction">Viewpoints</label>
     <input type="checkbox" id="art_gallery" name="artGalleries">
     <label for="art_gallery">Art Gallery</label>
-
     <button type="submit">Search Places</button>
   </form>
+</div>
+<div class="favorite">
+  {{#each favorites}}
+  {{favoriteName}}
+  {{start}}
+  {{end}}
+  {{/each}}
 </div>
 <script>
   let markers = [];
@@ -107,28 +116,49 @@
 
   let streetarts = [];
   function getstreetart() {
+
     return axios.get('/api/streetart').then((results) => {
       streetarts = results.data.results;
 
     })
   }
 
-  function updatemarker() {
+  function showartmarkers() {
+    event.preventDefault()
     getstreetart().then(() => {
       streetarts.forEach(function (element) {
         const markerStreetart = new google.maps.Marker({
           position: new google.maps.LatLng(Number(element.lat), Number(element.lng)),
           map: map,
-          icon: 'https://res.cloudinary.com/dt9z4xs6m/image/upload/v1605712720/purple-stars_t8wddi.png'
+          icon: 'https://res.cloudinary.com/dt9z4xs6m/image/upload/v1605712720/purple-stars_t8wddi.png',
+          animation: google.maps.Animation.DROP
+        });
+        let contentString =
+          `<a href=${`/streetarts/{{element._id}}`}> 
+				<div class='info__container'>
+					<div class='info__text'>	
+						<h1 class='info__text__title'>${element.name_description}</h1> 
+						<h5 class='info__text__subtitle'>${element.artist}</h5>
+            <h5 class='info__text__subtitle'>Start here<$let start = document.getElementById>${element.address}.value;
+            <h5 class='info__text__subtitle'>End here<$let end = document.getElementById>${element.address}.value;
+					</div>
+				</div></a>`
+
+        console.log(element)
+        //streetarts.push(markerStreetart);
+        const infowindow = new google.maps.InfoWindow({
+          content: contentString,
 
         });
-        //  console.log(element)
-        //streetarts.push(markerStreetart);
+        markerStreetart.addListener("click", () => {
+          infowindow.open(map, markerStreetart);
+        });
       })
     })
   }
 
-  function calcRoute() {
+  function calcRoute(event) {
+    event.preventDefault();
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
     //let start = "Santa Apolónia, Lisboa";
@@ -178,7 +208,8 @@
   }
 
 
-  function getCurrentLocation() { // Geolocation 
+  function getCurrentLocation(event) { // Geolocation 
+    event.preventDefault()
     navigator.geolocation.getCurrentPosition((position) => {
       const pos = {
         lat: position.coords.latitude,
@@ -189,10 +220,28 @@
       map.setZoom(13);
     });
   }
-
-  document.getElementById('routeSearchForm').addEventListener('submit', (event) => {
-    event.preventDefault();
+  /*
+    document.getElementById('routeSearchForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+    })
+  
+    */
+  document.getElementById('add-route').addEventListener('click', (event) => {
+    calcRoute(event)
   })
+  document.getElementById('clear-route').addEventListener('click', (event) => {
+    clearRoute(event)
+  })
+  document.getElementById('clear-markers').addEventListener('click', (event) => {
+    clearMarkers(event)
+  })
+  document.getElementById('get-current-location').addEventListener('click', (event) => {
+    getCurrentLocation(event)
+  })
+  document.getElementById('show-street-art').addEventListener('click', (event) => {
+    showartmarkers(event)
+  })
+
 
   document.getElementById('placesForm').addEventListener('submit', (event) => {
     event.preventDefault();
@@ -206,12 +255,14 @@
     }
   }
 
-  function clearMarkers() {
+  function clearMarkers(event) {
+    event.preventDefault()
     setMapOnAll(null);
     markers = [];
   }
 
   function clearRoute() {
+    event.preventDefault();
     // Clear past routes
     directionsRenderer.setMap(null)
     document.getElementById('start').value = ''

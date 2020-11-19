@@ -13,7 +13,12 @@ const streetartSchema = new Schema (
     longitude: Number,
     type: String,
     imageUrl: String,
-    comment: String,
+    reviews: [
+      {
+        user: String,
+        comment: String
+      }
+    ],
     isDeleted: {
       type: Boolean,
       default: false

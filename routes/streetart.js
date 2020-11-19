@@ -1,11 +1,11 @@
 const express = require('express');
 const router  = express.Router();
 const Streetart = require('../models/Streetart')
+
 //Route to render streetart list view
 router.get('/streetarts', (req, res) => {
   //Get streetart from Mongo and pass them to the view
   Streetart.find({ isDeleted: false })
-//    .populate('author')
     .then((allTheStreetartFromDB) => {
       res.render('streetarts-list', { streetarts: allTheStreetartFromDB});
     })
@@ -17,78 +17,86 @@ router.get('/streetarts', (req, res) => {
 //This route only has one purpose, which is
 //render the streetart-create view
 router.get('/streetarts/create', (req, res) => {
-  //find all the authors and send them to the view
-  //Author.find()
-  //  .then((authorsFromDB) => {
-      res.render('streetart-create');
-      //res.render('streetart-create', { stre: authorsFromDB});
+      res.render('streetarts-create');
     })
-//});
+
 router.post('/streetarts/create', (req, res) => {
- /* let title = req.body.title;
-  let author = req.body.author;
-  let description = req.body.description;
-  let rating = req.body.rating;*/
-  let { artist, name_description, latitude, longitude, imageUrl, comment } = req.body;
-  streetart.create({
+  let { artist, name_description, address, latitude, longitude, other_location_note, imageUrl, comment } = req.body;
+  Streetart.create({
     artist, 
     name_description,
+    address,
     latitude,
     longitude,
+    other_location_note,
     imageUrl,
     comment
   }).then(() => {
     res.redirect('/streetarts');
   });
 });
+
 //GET I'm sending a response with a view
-router.get('/streetarts/:streetartId/edit', (req, res) => {
-  let streetartId = req.params.streetartId;
-  streetart.findById(streetartId)
-    //.populate('author')
-    .then((thestreetartFound) => {
-      //found the streetart
-      //Author.find()
-        //.then((authorsFromDB) => {
-          res.render('streetart-edit', 
+router.get('/streetarts/:streetartsId/edit', (req, res) => {
+  let streetartsId = req.params.streetartsId;
+  Streetart.findById(streetartsId)
+    .then((theStreetartFound) => {
+          res.render('streetarts-edit', 
           { 
-            streetart: thestreetartFound, 
-            //authors: authorsFromDB
+            streetart: theStreetartFound, 
           });
         })
     })
-    // .catch((err) => {
-    //   res.render('error', { err });
-    // })
-//});
+
 //POST I'm persisting the changes on the database
-router.post('/streetarts/:streetartId/edit', (req, res) => {
-  let streetartId = req.params.streetartId;
-  let { artist, name_description, latitude, longitude, imageUrl, comment } = req.body;
-  streetart.findByIdAndUpdate(streetartId, {
+router.post('/streetarts/:streetartsId/edit', (req, res) => {
+  let streetartsId = req.params.streetartsId;
+  let { artist, name_description, address, latitude, longitude, other_location_note, imageUrl, comment } = req.body;
+  Streetart.findByIdAndUpdate(streetartsId, {
     artist,
     name_description,
+    address,
     latitude,
     longitude,
+    other_location_note,
     imageUrl,
     comment
-  }).then((updatedstreetart) => {
-    res.redirect(`/streetarts/${streetartId}`);
+  }).then((updatedStreetart) => {
+    res.redirect(`/streetarts/${streetartsId}`);
   });
 });
-router.post('/streetarts/:streetartId/delete', (req, res) => {
-  let streetartId = req.params.streetartId;
-  //Hard delete
-/*  streetart.findByIdAndDelete(streetartId)
-    .then(() => {
-      res.redirect('/streetarts');
-    });*/
+
+router.post('/streetarts/:streetartsId/delete', (req, res) => {
+  let streetartsId = req.params.streetartsId;
   //Soft delete
-  streetart.findByIdAndUpdate(streetartId, {
+  Streetart.findByIdAndUpdate(streetartsId, {
     isDeleted: true
   }).then(() => {
     res.redirect('/streetarts');
   });
+});
+
+//This is a route that recieves a route param
+router.get('/streetarts/:streetartsId', (req, res) => {
+  let streetartsId = req.params.streetartsId;
+  Streetart.findById(streetartsId)
+    .then((thestreetartFound) => {
+      res.render('streetarts-details', { streetart: thestreetartFound});
+    })
+    .catch((err) => {
+      res.render('error', { err });
+    })
+});
+
+//Add reviews route
+router.post('/reviews/:streetartsId/add', (req, res) => {
+  let streetartsId = req.params.streetartsId;
+  let { user, comment } = req.body;
+  Streetart.findByIdAndUpdate(streetartsId, 
+    { $push: { reviews: { user, comment }}})
+    .then(()=> {
+      res.redirect(`/streetarts/${streetartsId}`);
+    })
 });
 
 module.exports = router;

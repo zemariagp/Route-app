@@ -1,0 +1,33 @@
+<h1>{{streetart.name_description}}</h1>
+<p><img src={{streetart.imageUrl}} class="card-img-top" alt={{streetart.name_description}}>
+  <hr>
+
+<p>Art by: {{streetart.artist}}</p>
+<p>Summary: {{streetart.name_description}}</p>
+<p>Address: {{streetart.address}}</p>
+<p>Latitude: {{streetart.latitude}}</p>
+<p>Longitude: {{streetart.longitude}}</p>
+<p>Other Location Notes: {{streetart.other_location_note}}</p>
+<p>Comment: {{streetart.comment}}</p>
+<hr>
+<p>Have you seen it? Add your review:</p>
+<form action="/reviews/{{streetart._id}}/add" method="POST">
+  <label>
+    User
+    <input type="text" name="user">
+  </label>
+  <label>
+    Comment
+    <textarea name="comment"></textarea>
+  </label>
+  <button type="submit">Add Comment</button>
+</form>
+
+{{!-- use each bc reviews are in an array: --}}
+{{#each streetart.reviews}}
+<div>
+  <p>{{this.comment}} - {{this.user}}</p>
+</div>
+{{/each}}
+
+<a href="/streetarts">Back to street page</a>

@@ -1,0 +1,44 @@
+<h2>You have the power to edit <br>
+</h2>
+<form action="/streetarts/{{streetart._id}}/edit" method="POST">
+  <img src={{streetart.imageUrl}} class="card-img-top" alt={{title}}>
+  <label>
+    Artist
+    <input type="text" name="artist" value="{{streetart.artist}}">
+  </label>
+
+  {{!-- <label>
+    Name or Description
+    <textarea name="description" cols="30" rows="4" value="{{streetart.name_description}}"></textarea>
+  </label> --}}
+
+  <label>
+    Name or Description
+    <input type="text" name="description" value="{{streetart.name_description}}">
+  </label>
+  <br>
+  <label>
+    Address
+    <input type="double" name="address" value="{{streetart.address}}">
+  </label>
+  <label>
+    Latitude
+    <input type="string" name="latitude" value="{{streetart.latitude}}">
+  </label>
+  <label>
+    Longitude
+    <input type="string" name="longitude" value="{{streetart.longitude}}">
+  </label>
+  <br>
+
+  <label>
+    Other Location Notes
+    <input type="text" name="other_location_note" value="{{streetart.other_location_note}}">
+  </label>
+  <br>
+  {{!-- <label>
+    Comment
+    <textarea name="comment" cols="30" rows="4" value="{{streetart.comment}}"></textarea>
+  </label> --}}
+  <button type="submit">Update</button>
+</form>
