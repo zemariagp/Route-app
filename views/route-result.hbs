@@ -59,6 +59,7 @@
 
 <script>
   let markers = [];
+  let markerStreetartarray = [];
   let routeDestinationCoordinates;
   let directionsService;
   let directionsRenderer;
@@ -110,7 +111,7 @@
             let lng = results[i].geometry.location.lng();
             setMarker({ lat, lng }, name)
             map.setCenter(routeDestinationCoordinates);
-            map.setZoom(18);
+            map.setZoom(17);
           };
         };
       });
@@ -156,9 +157,13 @@
         markerStreetart.addListener("click", () => {
           infowindow.open(map, markerStreetart);
         });
+        markerStreetartarray.push(markerStreetart)
       })
+      console.log(markerStreetartarray)
     })
+
   }
+
 
   function calcRoute(event) {
     event.preventDefault();
@@ -256,13 +261,19 @@
     for (let i = 0; i < markers.length; i++) {
       markers[i].setMap(map);
     }
+
+
+    markerStreetartarray.forEach((markerStreetart) => {
+      markerStreetart.setMap(map)
+    })
   }
 
   function clearMarkers(event) {
     event.preventDefault()
     setMapOnAll(null);
-    markers = [];
   }
+
+
 
   function clearRoute() {
     event.preventDefault();
