@@ -20,7 +20,7 @@
       <p>Save route to favorites:
         <input class="updates" type="text" name="favoriteName"></p>
     </label>
-    <button type="submit" id="save-route">Save route</button>
+    <button type="submit" id="save-route">Save to favorites</button>
   </form>
 
 
@@ -46,13 +46,17 @@
     <button type="submit">Search Places</button>
   </form>
 </div>
+{{#each favorites}}
 <div class="favorite">
-  {{#each favorites}}
-  {{favoriteName}}
-  {{start}}
-  {{end}}
-  {{/each}}
+  <h4>{{favoriteName}}</h4>
+  <p>{{start}}
+    {{end}}</p>
+  <form action="/route-search/{{_id}}" method="POST">
+    <button type="submit" id="delete-route">Delete favorite </button>
+  </form>
 </div>
+{{/each}}
+
 <script>
   let markers = [];
   let routeDestinationCoordinates;
@@ -150,6 +154,7 @@
           content: contentString,
 
         });
+        map.setZoom(13);
         markerStreetart.addListener("click", () => {
           infowindow.open(map, markerStreetart);
         });
