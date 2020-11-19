@@ -1,23 +1,31 @@
+<link rel="stylesheet" href='/stylesheets/style.css' />
+<video autoplay loop muted id="background">
+  <source src="https://res.cloudinary.com/dt9z4xs6m/video/upload/v1605824975/movie/lisbon_uqch1o.mp4" type="video/mp4">
+</video>
+
 <nav class="navbar fixed-top navbar-light bg-light">
   <a class="navbar-brand" href="#">
     <img src="/images/purple-stars.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
     {{title}}
   </a>
 </nav>
+<div class="box">
+  <h2>Login</h2>
+  <form action="/login" method="POST">
+    <div class="inputBox">
+      <input type="text" name="username" placeholder="Enter Username">
+      <label>Username</label>
+    </div>
+    <div class="inputBox">
+      <input type="password" name="password" placeholder="··········">
+      <label>Password</label>
+    </div>
+    <input type="submit" value="Submit">
+    <button id="input-style">Login</button>
+  </form>
 
-<h2>Login</h2>
-<form action="/login" method="POST">
-  <label>
-    Username
-    <input type="text" name="username" required>
-  </label>
-  <label>
-    Password
-    <input type="password" name="password" required>
-  </label>
-  <button type="submit">Login</button>
-</form>
-<a href="/signup">Sign up here</a>
+  <a href="/signup">Sign up here</a>
+</div>
 
 <footer class="footer fixed-bottom">
   <div class="container">

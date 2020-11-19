@@ -1,3 +1,8 @@
+<link rel="stylesheet" href='/stylesheets/style.css' />
+<video autoplay loop muted id="background">
+  <source src="https://res.cloudinary.com/dt9z4xs6m/video/upload/v1605824975/movie/lisbon_uqch1o.mp4" type="video/mp4">
+</video>
+
 <nav class="navbar fixed-top navbar-light bg-light">
   <a class="navbar-brand" href="#">
     <img src="/images/purple-stars.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
@@ -6,10 +11,11 @@
 </nav>
 
 
-
-{{#unless user}}
-<h1>Welcome to {{title}}</h1>
-<a href="/signup" id="signup">Sign Up</a>
+<div class="login-signup">
+  {{#unless user}}
+  <h1>Welcome to {{title}}</h1>
+  <button class="btn btn-success"></button><a href="/signup" id="signup">Sign Up</a></button>
+</div>
 <footer class="footer fixed-bottom">
   <div class="container">
     <span> Route APP |
@@ -20,11 +26,14 @@
 {{/unless}}
 
 {{#if user}}
-<p>Welcome back, {{user.username}}</p>
-<a href="/route-search">Choose your Route</a>
-<form method="POST" action="/logout">
-  <button type="submit">Logout</button>
-</form>
+<div class="login-signup">
+  <p>Welcome back, {{user.username}}</p>
+  <input type="submit" value="Submit">
+  <button class="choose-route"><a href="/route-search">Choose your Route</a>
+    <form method="POST" action="/logout">
+      <button type="submit">Logout</button>
+    </form>
+</div>
 <footer class="footer fixed-bottom">
   <div class="container">
     <span> Route APP |
@@ -32,11 +41,11 @@
     </span>
   </div>
 </footer>
-<!--<a href="/private">Private</a>-->
-{{!-- <a href="/logout">log out</a> --}}
-<!-- <a href="/zomato">Zomato</a>-->
+
 {{else}}
-<a href="/login">Log In</a>
+<div class="login-signup">
+  <button class="btn btn-info" <a href="/login">Log In</a>
+</div>
 <footer class="footer fixed-bottom">
   <div class="container">
     <span> Route APP |
