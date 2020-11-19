@@ -41,7 +41,7 @@ router.get("/route-search", (req, res) => {
   let markersString = JSON.stringify(markers);
   Favorite.find()
   .then((allFavoritesFromDB) => {
-    console.log(allFavoritesFromDB)
+    //console.log(allFavoritesFromDB)
     res.render("route-result", {markers: markersString, favorites: allFavoritesFromDB})
   });
 })
@@ -58,6 +58,18 @@ router.post('/route-search', (req, res, next) => {
     res.render("error", {err});
   })
 });
+
+router.post("/route-search/:favoriteId", (req, res) => {
+  let favoriteId = req.params.favoriteId;
+  Favorite.findByIdAndDelete(favoriteId)
+  
+  .then(() => {
+    console.log(favoriteId)
+    res.redirect("/route-search")
+  }).catch((err) => {
+    res.render("error", {err});
+  })
+})
 
 
 module.exports = router;
