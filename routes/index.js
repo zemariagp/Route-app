@@ -2,11 +2,13 @@ const express = require('express');
 const router  = express.Router();
 const app = require('../app');
 const axios = require('axios');
-
+const Favorite = require('../models/Favorite');
+/*
 const zomatoAPI = axios.create({
   baseURL: 'https://developers.zomato.com/api/v2.1/',
   headers: { 'user-key': process.env.ZOMATO_KEY }
 });
+*/
 
 //middleware we create:
 function requireLogin(req, res, next) {
@@ -37,8 +39,25 @@ router.get("/route-search", (req, res) => {
     { lat: 38.7123872, lng: -9.1287935}
   ];
   let markersString = JSON.stringify(markers);
-  res.render("route-result", {markers: markersString});
+  Favorite.find()
+  .then((allFavoritesFromDB) => {
+    console.log(allFavoritesFromDB)
+    res.render("route-result", {markers: markersString, favorites: allFavoritesFromDB})
+  });
 })
+
+router.post('/route-search', (req, res, next) => {
+  let {favoriteName, start, end} = req.body;
+  Favorite.create({
+    favoriteName, 
+    start, 
+    end
+  }).then(() => {
+    res.redirect("/route-search")
+  }).catch((err) => {
+    res.render("error", {err});
+  })
+});
 
 
 module.exports = router;
