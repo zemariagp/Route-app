@@ -117,7 +117,7 @@
   let streetarts = [];
   function getstreetart() {
 
-    return axios.get('/api/streetart').then((results) => {
+    return axios.get('/api/all').then((results) => {
       streetarts = results.data.results;
 
     })
