@@ -4,6 +4,7 @@ const router  = express.Router();
 const app = require('../app');
 const fileUpload = require('../configs/cloudinary')
 
+
 router.get('/api/all', (req, res) => {
   Streetart.find().then(resultsDB => {
     let results = [];
