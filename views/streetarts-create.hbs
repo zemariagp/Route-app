@@ -1,44 +1,45 @@
 <h1>Located great street art? Add it here! </h1>
-
-<form action="/streetarts/create" method="POST">
-  <label>
-    Picture
-    <input type="file" name="image">
-  </label>
-  <label>
-    Artist
-    <input type="text" name="artist">
-  </label>
-  <label>
-    Name or Description
-    <textarea name="name_description" cols="30" rows="2"></textarea>
-  </label> <br>
-
-  <label>
-    Address
-    <input type="double" name="address">
-  </label>
-  <label>
-    Latitude
-    <input type="double" name="latitude">
-  </label>
-  <label>
-    Longitude
-    <input type="double" name="longitude">
-  </label>
-  <label><br>
-
-    Other Location Notes
-    <input type="text" name="other_location_note" value="{{streetart.other_location_note}}">
-  </label>
-
-  <label>
-    Comment
-    <textarea name="comment" cols="30" rows="2"></textarea>
-  </label>
-
-  <button type="submit">Create</button>
-</form>
+<div class="container">
+  <form action="/streetarts/create" method="POST">
+    <div class="col-10">
+      <div class="form-group row ml-10">
+        <label>
+          Select Your Picture
+          <input type="file" id="piclass=" form-control" name="image">
+        </label>
+        <label>
+          Artist
+          <input type="text" class="form-control" name="artist">
+        </label>
+        <label>
+          Name or Description
+          <textarea name="name_description" class="form-control" cols="30" rows="2"></textarea>
+        </label>
+        <label>
+          Address
+          <input type="double" class="form-control" name="address">
+        </label>
+        <label>
+          Latitude
+          <input type="double" class="form-control" name="latitude">
+        </label>
+        <label>
+          Longitude
+          <input type="double" class="form-control" name="longitude">
+        </label>
+        <label>
+          Other Location Notes
+          <input type="text" class="form-control" name="other_location_note" value="{{streetart.other_location_note}}">
+        </label>
+        <label>
+          Comment
+          <textarea name="comment" class="form-control" cols="30" rows="2"></textarea>
+        </label>
+      </div>
+      <button type="submit" class="create-button">Create</button>
+  </form>
+</div>
+</div>
 <br>
 <a href="/route-search">Back to route map</a>
 <br>
