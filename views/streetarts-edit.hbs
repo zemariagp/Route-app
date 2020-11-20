@@ -7,15 +7,11 @@
     <input type="text" name="artist" value="{{streetart.artist}}">
   </label>
 
-  {{!-- <label>
-    Name or Description
-    <textarea name="description" cols="30" rows="4" value="{{streetart.name_description}}"></textarea>
-  </label> --}}
-
   <label>
     Name or Description
-    <input type="text" name="description" value="{{streetart.name_description}}">
+    <textarea name="description" cols="30" rows="2">{{streetart.name_description}}</textarea>
   </label>
+
   <br>
   <label>
     Address
@@ -33,12 +29,16 @@
 
   <label>
     Other Location Notes
-    <input type="text" name="other_location_note" value="{{streetart.other_location_note}}">
+    <textarea name="comment" cols="30" rows="2">{{streetart.other_location_note}}</textarea>
   </label>
   <br>
-  {{!-- <label>
+  <label>
     Comment
-    <textarea name="comment" cols="30" rows="4" value="{{streetart.comment}}"></textarea>
-  </label> --}}
+    <textarea name="comment" cols="30" rows="2">{{streetart.comment}}</textarea>
+  </label>
   <button type="submit">Update</button>
 </form>
+<br>
+<a href="/route-search">Back to route map</a>
+<br>
+<a href="/streetarts">List of all street art</a>

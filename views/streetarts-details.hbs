@@ -2,7 +2,7 @@
 <p><img src={{streetart.imageUrl}} class="graffiti" alt={{streetart.name_description}}>
   <hr>
 
-<p>Art by:{{streetart.artist}}</p>
+<p>Art by: {{streetart.artist}}</p>
 <p>Summary: {{streetart.name_description}}</p>
 <p>Address: {{streetart.address}}</p>
 <p>Latitude: {{streetart.latitude}}</p>
@@ -12,11 +12,6 @@
 <hr>
 <p>Have you seen it? Add your review:</p>
 <form action="/reviews/{{streetart._id}}/add" method="POST">
-  {{#each streetart}}
-  <label>
-    User
-    {{this.user}}
-  </label>
   <label>
     User
     <input type="text" name="user">
@@ -27,12 +22,13 @@
   </label>
   <button type="submit">Add Comment</button>
 </form>
-
 {{!-- use each bc reviews are in an array: --}}
 {{#each streetart.reviews}}
 <div>
   <p>{{this.comment}} - {{this.user}}</p>
 </div>
 {{/each}}
-
-<a href="/streetarts">Back to street page</a>
+<br>
+<a href="/route-search">Back to route map</a>
+<br>
+<a href="/streetarts">List of all street art</a>
