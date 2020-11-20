@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top navbar-light bg-light">
+<nav class="navbar relative-top navbar-light bg-light">
   <a class="navbar-brand" href="#">
     <img src="/images/purple-stars.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
     Where do you want to go?
@@ -19,21 +19,21 @@
     <button class="btn btn-primary btn-sm" id="clear-route">Clear route</button>
     <button class="btn btn-primary btn-sm" id="clear-markers">Clear markers</button>
     <button class="btn btn-primary btn-sm" id="get-current-location">Get current location</button>
-    <button class="btn btn-primary btn-sm" type="submit" id="show-street-art">Show Street Art</button>
     <div class="save-favorites">
       <label>
         <p>Save route to favorites:
           <input class="updates" type="text" name="favoriteName" required></p>
       </label>
-      <button class="btn btn-secondary btn-sm" type="submit" id="save-route">Save to favorites</button>
-      <a href="/streetarts">List of street art</a>
-      <a href="/streetarts/create">Create a new street art point</a>
+      <button class="btn btn-primary btn-sm" type="submit" id="save-route">Save to favorites</button>
+      <a class="btn btn-primary btn-sm" id="street-art-a1" href="/streetarts">List of street art</a>
+      <a class="btn btn-primary btn-sm" id="street-art-a2" href="/streetarts/create">Create a new street art point</a>
     </div>
   </form>
 </div>
 
 <div id="places-buttons" class="btn-group-toggle" data-toggle="buttons">
   <form action="#" id="placesForm" method="GET">
+    <button class="btn btn-primary active" type="submit" id="show-street-art">Show Street Art</button>
     <input type="checkbox" id="restaurants" name="restaurants">
     <label class="btn btn-primary active" for="restaurants">Restaurants</label>
     <input type="checkbox" id="bars" name="bars">
@@ -46,7 +46,7 @@
     <label class="btn btn-primary active" for="tourist_attraction">Viewpoints</label>
     <input type="checkbox" id="art_gallery" name="artGalleries">
     <label class="btn btn-primary active" for="art_gallery">Art Gallery</label>
-    <button class="btn btn-primary active" type="submit">Search Places</button>
+    <button id="search-places-btn" class="btn btn-primary active" type="submit">Search Places</button>
   </form>
 </div>
 
