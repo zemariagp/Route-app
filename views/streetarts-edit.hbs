@@ -1,44 +1,64 @@
-<h2>You have the power to edit <br>
-</h2>
-<form action="/streetarts/{{streetart._id}}/edit" method="POST">
-  <img src={{streetart.imageUrl}} class="card-img-top" alt={{title}}><br>
-  <label>
-    Artist
-    <input type="text" name="artist" value="{{streetart.artist}}">
-  </label>
+<div class="fluid-container">
 
-  <label>
-    Name or Description
-    <textarea name="description" cols="30" rows="2">{{streetart.name_description}}</textarea>
-  </label>
-
-  <br>
-  <label>
-    Address
-    <input type="double" name="address" value="{{streetart.address}}">
-  </label>
-  <label>
-    Latitude
-    <input type="string" name="latitude" value="{{streetart.latitude}}">
-  </label>
-  <label>
-    Longitude
-    <input type="string" name="longitude" value="{{streetart.longitude}}">
-  </label>
+  <h2>You have the power to edit</h2>
   <br>
 
-  <label>
-    Other Location Notes
-    <textarea name="comment" cols="30" rows="2">{{streetart.other_location_note}}</textarea>
-  </label>
-  <br>
-  <label>
-    Comment
-    <textarea name="comment" cols="30" rows="2">{{streetart.comment}}</textarea>
-  </label>
-  <button type="submit">Update</button>
-</form>
+  <div class="row no-gutters">
+    <div class="col-md" <form action="/streetarts/{{streetart._id}}/edit" method="POST" enctype="multipart/form-data">
+
+      <div class="menu-image h-100 d-flex align-items-start pl-5">
+
+        <img src={{streetart.imageUrl}} class="img-fluid" alt={{title}}>
+      </div>
+    </div>
+
+    <div class="col-md">
+      <div class="menu-text">
+        <div class="main-title text-left">
+          <label class="menu-content d-flex space-between">
+            Artist
+            <input type="text" name="artist" value="{{streetart.artist}}">
+          </label>
+
+          <label class="menu-content d-flex space-between">
+            Name or Description
+            <textarea name="description" cols="30" rows="2">{{streetart.name_description}}</textarea>
+          </label>
+
+          <label class="menu-content d-flex space-between">
+            Address
+            <input type="double" name="address" value="{{streetart.address}}">
+          </label>
+
+          <label class="menu-content d-flex space-between">
+            Latitude
+            <input type="string" name="latitude" value="{{streetart.latitude}}">
+          </label>
+
+          <label class="menu-content d-flex space-between">
+            Longitude
+            <input type="string" name="longitude" value="{{streetart.longitude}}">
+          </label>
+
+          <label class="menu-content d-flex space-between">
+            Other Location Notes
+            <textarea name="comment" cols="30" rows="2">{{streetart.other_location_note}}</textarea>
+          </label>
+
+          <label class="menu-content d-flex space-between">
+            Comment
+            <textarea name="comment" cols="30" rows="2">{{streetart.comment}}</textarea>
+          </label>
+          <button type="submit" class="update-button">Update</button>
+        </div>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
 <br>
 <a href="/route-search">Back to route map</a>
 <br>
 <a href="/streetarts">List of all street art</a>
+
+</div>
