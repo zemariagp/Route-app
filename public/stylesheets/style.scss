@@ -10,6 +10,8 @@ a {
   color: #00B7FF;
 }
 
+
+
 #map {
   height: 500px;
   width: 98%;
@@ -51,14 +53,16 @@ a {
   position: relative;
   left: 10px;
   bottom: 4px;
-  background-color: #00B7FF !important;
+  
 }
 
 
 
+#save-favorite {
+  margin-top: 20px;
+  display: flex !important;
 
-.favorite-cards {
- margin-top: 50px;
+ 
 }
 
 .label-start {

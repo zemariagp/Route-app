@@ -36,11 +36,11 @@ a {
 #search-places-btn {
   position: relative;
   left: 10px;
-  bottom: 4px;
-  background-color: #00B7FF !important; }
+  bottom: 4px; }
 
-.favorite-cards {
-  margin-top: 50px; }
+#save-favorite {
+  margin-top: 20px;
+  display: flex !important; }
 
 .label-start {
   position: relative;
