@@ -33,7 +33,7 @@
 
 <div id="places-buttons" class="btn-group-toggle" data-toggle="buttons">
   <form action="#" id="placesForm" method="GET">
-    <button class="btn btn-primary active" type="submit" id="show-street-art">Show Street Art</button>
+    <button class="btn btn-primary" type="submit" id="show-street-art">Show Street Art</button>
     <input type="checkbox" id="restaurants" name="restaurants">
     <label class="btn btn-primary active" for="restaurants">Restaurants</label>
     <input type="checkbox" id="bars" name="bars">
@@ -46,21 +46,21 @@
     <label class="btn btn-primary active" for="tourist_attraction">Viewpoints</label>
     <input type="checkbox" id="art_gallery" name="artGalleries">
     <label class="btn btn-primary active" for="art_gallery">Art Gallery</label>
-    <button id="search-places-btn" class="btn btn-primary active" type="submit">Search Places</button>
+    <button id="search-places-btn" class="btn btn-primary" type="submit">Search Places</button>
   </form>
 </div>
 
 
-<div class="favorite-cards">
+<div id="save-favorite" class="container card-group ">
   {{#each favorites}}
-  <div class="col-sm-4">
-    <div class="card" style="width: 14rem;">
-      <div class="card-body">
-        <h6 class="card-title">{{favoriteName}}</h6>
+  <div class="col-sm-3" style="margin-bottom: 2em;">
+    <div class="card " style="width: 14rem; min-height:14rem;">
+      <div class="card-body ">
+        <h6 class="card-title ">{{favoriteName}}</h6>
         <p>{{start}}</p>
         <p> {{end}}</p>
         <form action="/route-search/{{_id}}" method="POST">
-          <button class="btn btn-secondary btn-sm" type="submit" id="delete-route">Delete favorite </button>
+          <button class="btn btn-secondary btn-sm " type="submit" id="delete-route">Delete favorite </button>
         </form>
       </div>
     </div>
