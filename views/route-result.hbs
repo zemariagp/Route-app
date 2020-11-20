@@ -7,19 +7,19 @@
 
 
 <div id="map"></div>
-<div>
+<div class="map-routes">
   <form id="routeSearchForm" action="/route-search" method="POST">
     <label for="start">
-      <input type="text" id="start" name="start" placeholder="starting point">
+      <input type="text" class="label-start" id="start" name="start" placeholder="starting point">
     </label>
     <label for="end">
-      <input type="text" id="end" name="end" placeholder="destination">
+      <input type="text" class="label-end" id="end" name="end" placeholder="destination">
     </label>
     <button class="btn btn-primary btn-sm" id="add-route">Add route</button>
     <button class="btn btn-primary btn-sm" id="clear-route">Clear route</button>
     <button class="btn btn-primary btn-sm" id="clear-markers">Clear markers</button>
     <button class="btn btn-primary btn-sm" id="get-current-location">Get current location</button>
-    <button class="btn btn-primary btn-lg" type="submit" id="show-street-art">Show Street Art</button>
+    <button class="btn btn-primary btn-sm" type="submit" id="show-street-art">Show Street Art</button>
     <div class="save-favorites">
       <label>
         <p>Save route to favorites:
@@ -32,7 +32,7 @@
   </form>
 </div>
 
-<div class="btn-group-toggle" data-toggle="buttons">
+<div id="places-buttons" class="btn-group-toggle" data-toggle="buttons">
   <form action="#" id="placesForm" method="GET">
     <input type="checkbox" id="restaurants" name="restaurants">
     <label class="btn btn-primary active" for="restaurants">Restaurants</label>
@@ -46,12 +46,12 @@
     <label class="btn btn-primary active" for="tourist_attraction">Viewpoints</label>
     <input type="checkbox" id="art_gallery" name="artGalleries">
     <label class="btn btn-primary active" for="art_gallery">Art Gallery</label>
-    <button class="btn btn-primary btn-lg" type="submit">Search Places</button>
+    <button class="btn btn-primary active" type="submit">Search Places</button>
   </form>
 </div>
-</div>
 
-<div>
+
+<div class="favorite-cards">
   {{#each favorites}}
   <div class="col-sm-4">
     <div class="card" style="width: 14rem;">

@@ -1,6 +1,8 @@
 body {
-  padding: 50px;
+  
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-top: 20px !important;
+  margin-bottom: 100px;
 }
 
 a {
@@ -12,3 +14,71 @@ a {
   width: 100%;
 }
 
+.save-favorites {
+  margin-top: 150px;
+
+  justify-content: center;
+  bottom: 13vw;
+}
+.map-routes {
+  position: relative;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+#places-buttons {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  bottom: 13vw;
+}
+
+#show-street-art {
+  
+}
+
+.favorite-cards {
+ margin-top: 150px;
+}
+
+.label-start {
+  position: relative;
+  width: 220px;
+}
+
+.label-end {
+  position: relative;
+  width: 220px;
+
+}
+.details-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 37px;
+  margin-top: -20px;
+}
+.graffiti {
+  width: 60vw;
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.col-sm-4 {
+  margin-bottom: 20px!important;
+}
+
+  footer {
+    width: 110% !important;
+    margin-left: -80px !important;
+    margin-top: 350px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #292929;
+    color: white;
+    font-size: 12px;
+    text-align: left;
+}
